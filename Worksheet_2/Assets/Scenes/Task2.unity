@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCirclePrefab: {fileID: 570732247673829352, guid: e2be66a847db8eb4a94c9fa3f110e6f1, type: 3}
+  padding: 0.5
 --- !u!4 &1197371485
 Transform:
   m_ObjectHideFlags: 0
