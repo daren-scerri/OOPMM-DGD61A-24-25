@@ -5,15 +5,16 @@ using UnityEngine;
 public class Circle : MonoBehaviour
 {
     Rigidbody2D circleRB;
-    [SerializeField] float yspeed=1;
-    [SerializeField] float starting_Xpos = 0;
-    [SerializeField] float starting_Ypos = 0;
+    
+    private float startPosX, startPosY, yspeed;
 
     ShapeMovement myCircleMovement;
     // Start is called before the first frame update
     void Start()
     {
-        myCircleMovement = new ShapeMovement(starting_Xpos, starting_Ypos, 0f, yspeed);
+        startPosX = this.gameObject.transform.position.x;
+        startPosY = this.gameObject.transform.position.y;
+        myCircleMovement = new ShapeMovement(startPosX, startPosY, 0f, yspeed);
         circleRB = GetComponent<Rigidbody2D>();
         myCircleMovement.ResetPosition(circleRB);
 
@@ -25,6 +26,6 @@ public class Circle : MonoBehaviour
         
         myCircleMovement.MoveUp(circleRB);
         myCircleMovement.MoveDown(circleRB);
-
+        myCircleMovement.ResetPosition(circleRB);
     }
 }

@@ -47,7 +47,10 @@ public class ShapeMovement
 
     public void ResetPosition(Rigidbody2D rb)
     {
-        rb.position = new Vector2(xpos, ypos);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.position = new Vector2(xpos, ypos);
+        }
     }
 
 }
