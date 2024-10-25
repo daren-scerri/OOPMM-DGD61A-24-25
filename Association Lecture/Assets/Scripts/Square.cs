@@ -5,8 +5,8 @@ using UnityEngine;
 public class Square : MonoBehaviour
 {
     Rigidbody2D squareRB;
-    private float startPosX, startPosY, xspeed;
-
+    private float startPosX, startPosY;
+    public float xspeed;
     ShapeMovement mySquareMovement;
     // Start is called before the first frame update
     void Start()

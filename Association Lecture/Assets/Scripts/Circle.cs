@@ -5,9 +5,9 @@ using UnityEngine;
 public class Circle : MonoBehaviour
 {
     Rigidbody2D circleRB;
-    
-    private float startPosX, startPosY, yspeed;
 
+    private float startPosX, startPosY;
+    public float yspeed;
     ShapeMovement myCircleMovement;
     // Start is called before the first frame update
     void Start()
