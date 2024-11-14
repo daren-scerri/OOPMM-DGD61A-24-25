@@ -5,6 +5,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class CannonController : MonoBehaviour
 {
+    [SerializeField] GameObject bullet1Prefab;
+    [SerializeField] GameObject bullet2Prefab;
+    [SerializeField] Transform cannonTip;
     Quaternion clampRotationLow, clampRotationHigh;
     
     // Start is called before the first frame update
@@ -15,9 +18,20 @@ public class CannonController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         PointAtMouse();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Instantiate(bullet1Prefab, cannonTip.position, cannonTip.rotation);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Instantiate(bullet2Prefab, cannonTip.position, cannonTip.rotation);
+        }
+
     }
 
 

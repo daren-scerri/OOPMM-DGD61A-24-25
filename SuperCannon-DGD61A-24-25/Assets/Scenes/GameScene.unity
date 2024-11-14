@@ -399,6 +399,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eceed524980e1db46bbd314920fc6398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet1Prefab: {fileID: 1520513432837923236, guid: ceabb223c11d6ff4fbdd6c09ea90dc3e, type: 3}
+  bullet2Prefab: {fileID: 5741812977111654739, guid: 7dc5c2654ca95554f86cefdf9f73ae8f, type: 3}
+  cannonTip: {fileID: 1892735098}
 --- !u!70 &1067699243
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
