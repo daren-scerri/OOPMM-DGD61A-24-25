@@ -15,6 +15,7 @@ public class CannonController : MonoBehaviour
     Quaternion clampRotationLow, clampRotationHigh;
 
     Coroutine fire1coroutine, fire2coroutine;
+    GameObject pooledCannonBall, pooledMissile;
 
     // Start is called before the first frame update
     void Start()
@@ -32,8 +33,8 @@ public class CannonController : MonoBehaviour
         {
             if (fire1coroutine == null)
             {
-                GameObject pooledCannonBall = cannonBallPool.GetPoolObject();
-                fire1coroutine = StartCoroutine(FireContinuously(pooledCannonBall, fire1Rate));
+                //pooledCannonBall = cannonBallPool.GetPoolObject();
+                fire1coroutine = StartCoroutine(FireContinuously(cannonBallPool, fire1Rate));
             }
                 
         }
@@ -42,8 +43,8 @@ public class CannonController : MonoBehaviour
         {
             if (fire2coroutine == null)
             {
-                GameObject pooledMissile = missilePool.GetPoolObject();
-                fire2coroutine = StartCoroutine(FireContinuously(pooledMissile, fire2Rate));
+              //  pooledMissile = missilePool.GetPoolObject();
+                fire2coroutine = StartCoroutine(FireContinuously(missilePool, fire2Rate));
             }
         }
 
@@ -61,10 +62,11 @@ public class CannonController : MonoBehaviour
 
     }
 
-    IEnumerator FireContinuously(GameObject pooledBullet, float _firingRate)
+    IEnumerator FireContinuously(ObjectPooling bulletPool, float _firingRate)
     {
         while (true)
         {
+            GameObject pooledBullet = bulletPool.GetPoolObject();
             pooledBullet.transform.position = cannonTip.position;
             pooledBullet.transform.rotation = cannonTip.rotation;
             pooledBullet.SetActive(true);  //Instantiate(bulletPrefab, cannonTip.position, cannonTip.rotation);

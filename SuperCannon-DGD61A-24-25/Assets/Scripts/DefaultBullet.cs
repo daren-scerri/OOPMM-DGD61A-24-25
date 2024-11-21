@@ -15,6 +15,7 @@ public class DefaultBullet : MonoBehaviour
     }
     protected virtual void OnEnable()
     {
+        rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.up * speed;
 
         
@@ -26,7 +27,12 @@ public class DefaultBullet : MonoBehaviour
 
     void OnBecameInvisible()
     {
+     
         this.gameObject.SetActive(false);//Destroy(this.gameObject);
+        rb.velocity = new Vector3(0, 0, 0);
+        this.gameObject.transform.position = new Vector3(0,0,0);
+        this.gameObject.transform.rotation = Quaternion.identity;
+
     }
 
 
