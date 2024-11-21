@@ -13,16 +13,20 @@ public class DefaultBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
     }
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
         rb.velocity = transform.up * speed;
 
         
     }
 
+    protected virtual void Start()
+    { 
+    }
+
     void OnBecameInvisible()
     {
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);//Destroy(this.gameObject);
     }
 
 

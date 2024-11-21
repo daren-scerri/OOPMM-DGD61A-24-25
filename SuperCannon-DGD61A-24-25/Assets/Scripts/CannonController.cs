@@ -10,6 +10,8 @@ public class CannonController : MonoBehaviour
     [SerializeField] Transform cannonTip;
     [SerializeField] float fire1Rate, fire2Rate;
 
+    public ObjectPooling cannonBallPool, missilePool;
+
     Quaternion clampRotationLow, clampRotationHigh;
 
     Coroutine fire1coroutine, fire2coroutine;
@@ -28,12 +30,21 @@ public class CannonController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (fire1coroutine == null) fire1coroutine = StartCoroutine(FireContinuously(bullet1Prefab, fire1Rate));
+            if (fire1coroutine == null)
+            {
+                GameObject pooledCannonBall = cannonBallPool.GetPoolObject();
+                fire1coroutine = StartCoroutine(FireContinuously(pooledCannonBall, fire1Rate));
+            }
+                
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (fire2coroutine == null) fire2coroutine = StartCoroutine(FireContinuously(bullet2Prefab, fire2Rate));
+            if (fire2coroutine == null)
+            {
+                GameObject pooledMissile = missilePool.GetPoolObject();
+                fire2coroutine = StartCoroutine(FireContinuously(pooledMissile, fire2Rate));
+            }
         }
 
         if (Input.GetMouseButtonUp(0)) 
@@ -50,12 +61,14 @@ public class CannonController : MonoBehaviour
 
     }
 
-    IEnumerator FireContinuously(GameObject bulletPrefab, float _firingRate)
+    IEnumerator FireContinuously(GameObject pooledBullet, float _firingRate)
     {
         while (true)
         {
-        Instantiate(bulletPrefab, cannonTip.position, cannonTip.rotation);
-        yield return new WaitForSeconds(_firingRate);
+            pooledBullet.transform.position = cannonTip.position;
+            pooledBullet.transform.rotation = cannonTip.rotation;
+            pooledBullet.SetActive(true);  //Instantiate(bulletPrefab, cannonTip.position, cannonTip.rotation);
+            yield return new WaitForSeconds(_firingRate);
         }
     }
 
