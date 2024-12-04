@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : Singleton<EnemySpawner>
 {
+
+    public static EnemySpawner myEnemySpawner;
+
+
     public List<EnemySO> enemyTypeList = new List<EnemySO>();
     public float enemySpawnInterval = 1.0f;
 
