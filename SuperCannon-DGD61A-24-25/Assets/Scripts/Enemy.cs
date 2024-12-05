@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public interface ITakeDamage
+{
+    public void ApplyDamage(int hitpoints);
+}
+
+
 public class Enemy : MonoBehaviour
 {
 
@@ -11,29 +18,22 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+       Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = speed;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Bullet")
         {
-            hitpoints -= 1;
-
-        }
-
-        if (hitpoints <= 0)
-        {
-            GameData.Score += 1;
-            Debug.Log("Score: " + GameData.Score.ToString());
-            Destroy(this.gameObject);
+            GetComponent<ITakeDamage>().ApplyDamage(hitpoints);
         }
     }
 
     private void OnBecameInvisible()
     {
         GameData.PlayerHealth -= 1;
-        Debug.Log("Player health: " + GameData.PlayerHealth.ToString());
+        //Debug.Log("Player health: " + GameData.PlayerHealth.ToString());
         Destroy(this.gameObject);
         
     }

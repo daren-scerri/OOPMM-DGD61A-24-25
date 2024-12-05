@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 361603509604237871}
   - component: {fileID: 4214904468827715527}
   - component: {fileID: -2850530995282208891}
+  - component: {fileID: -1899078093485220509}
   - component: {fileID: 5398049653815207239}
   m_Layer: 0
   m_Name: Enemy1
@@ -129,6 +130,18 @@ MonoBehaviour:
   strength: 0
   hitpoints: 0
   speed: 0
+--- !u!114 &-1899078093485220509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7119012190527214084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4811956f7eafd641b0cc343527c7584, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!60 &5398049653815207239
 PolygonCollider2D:
   m_ObjectHideFlags: 0

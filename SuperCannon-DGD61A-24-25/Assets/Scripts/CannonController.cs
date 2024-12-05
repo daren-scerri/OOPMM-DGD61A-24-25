@@ -5,8 +5,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class CannonController : Singleton<CannonController>
 {
-     public static CannonController instance;
-
+     
     [SerializeField] GameObject bullet1Prefab;
     [SerializeField] GameObject bullet2Prefab;
     [SerializeField] Transform cannonTip;

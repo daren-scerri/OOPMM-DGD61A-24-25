@@ -5,8 +5,7 @@ using UnityEngine;
 public class EnemySpawner : Singleton<EnemySpawner>
 {
 
-    public static EnemySpawner myEnemySpawner;
-
+    
 
     public List<EnemySO> enemyTypeList = new List<EnemySO>();
     public float enemySpawnInterval = 1.0f;
