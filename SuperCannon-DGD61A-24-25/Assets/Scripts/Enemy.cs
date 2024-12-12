@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = speed;
     }
@@ -28,11 +29,19 @@ public class Enemy : MonoBehaviour
         {
             GetComponent<ITakeDamage>().ApplyDamage(hitpoints);
         }
+
+        if (other.gameObject.name.Contains("PlayerBase"))
+        {
+            EnemyWins();
+        }
     }
 
-    private void OnBecameInvisible()
+
+
+    private void EnemyWins()
     {
         GameData.PlayerHealth -= 1;
+        GameManager.Instance.DisplayHealth();
         //Debug.Log("Player health: " + GameData.PlayerHealth.ToString());
         Destroy(this.gameObject);
         
