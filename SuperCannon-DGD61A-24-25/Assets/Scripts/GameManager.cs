@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
@@ -10,11 +11,36 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] Text playerScoreText;
     [SerializeField] Text playerHealthText;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this.gameObject);
+        GameData.Score = 0;
+        DisplayScore();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
     public void OnEnemyDie(int hitpoints)
     {
 
         GameData.Score += hitpoints;
+        DisplayScore();
+    }
+
+    public void DisplayScore()
+    {
         playerScoreText.text = "Score: " + GameData.Score.ToString();
+    }
+
+    public void OnEnemyWins()
+    {
+
+        
+        DisplayHealth();
+        if (GameData.PlayerHealth <= 0)
+        {
+            SceneManager.LoadScene("LoseScene");
+        }
     }
 
     public void DisplayHealth()
@@ -27,9 +53,22 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        GameData.PlayerHealth = 100;
+        GameData.PlayerHealth = 5;
         DisplayHealth();
-        GameData.Score = 0;
+        
     }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "LoseScene")
+        {
+            EnemySpawner myEnemySpawner = GetComponent<EnemySpawner>();
+            Destroy(myEnemySpawner);
+        }
+        
+        Debug.Log("OnSceneLoaded: " + scene.name);
+        Debug.Log(mode);
+    }
+
 
 }

@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
     private void EnemyWins()
     {
         GameData.PlayerHealth -= 1;
-        GameManager.Instance.DisplayHealth();
+        GameManager.Instance.OnEnemyWins();
         //Debug.Log("Player health: " + GameData.PlayerHealth.ToString());
         Destroy(this.gameObject);
         
