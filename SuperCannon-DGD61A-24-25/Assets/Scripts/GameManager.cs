@@ -10,13 +10,13 @@ public class GameManager : Singleton<GameManager>
     //public static GameManager myGameManager;
     [SerializeField] Text playerScoreText;
     [SerializeField] Text playerHealthText;
+    [SerializeField] int startHealth=100;
 
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this.gameObject);
-        GameData.Score = 0;
-        DisplayScore();
+        
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -30,6 +30,7 @@ public class GameManager : Singleton<GameManager>
     public void DisplayScore()
     {
         playerScoreText.text = "Score: " + GameData.Score.ToString();
+        SaveLoadManager.Instance.SaveData();
     }
 
     public void OnEnemyWins()
@@ -53,15 +54,19 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        GameData.PlayerHealth = 5;
+        GameData.Score = 0;
+        GameData.PlayerHealth = startHealth;
+        SaveLoadManager.Instance.LoadData();
+        DisplayScore();
         DisplayHealth();
-        
+
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "LoseScene")
         {
+            // Playerprefs example....  PlayerPrefs.SetInt("score", GameData.Score);
             EnemySpawner myEnemySpawner = GetComponent<EnemySpawner>();
             Destroy(myEnemySpawner);
         }

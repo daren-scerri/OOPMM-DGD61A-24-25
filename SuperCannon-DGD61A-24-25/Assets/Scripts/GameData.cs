@@ -7,7 +7,7 @@ public abstract class GameData : MonoBehaviour
 {
     private static float _padding = 0;
     private static int _score;
-    private static int _playerhealth = 100;
+    private static int _playerhealth;
     public static int Score
     {
         get { return _score; }
